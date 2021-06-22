@@ -174,13 +174,15 @@ static void idle_state_handle(void)
 int main(void)
 {
     bool erase_bonds;
-
+		
+		APP_ERROR_CHECK(ble_dfu_buttonless_async_svci_init());  //Enable in Release
     // Initialize.
     log_init();
     timers_init();
     buttons_leds_init(&erase_bonds);
     power_management_init();
 	
+		sd_power_dcdc_mode_set(NRF_POWER_DCDC_ENABLE);
 		simple_ble_init(nus_data_handler);
 
     // Start execution.

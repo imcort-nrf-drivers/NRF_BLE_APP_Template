@@ -14,6 +14,15 @@
 #include "nrf_ble_qwr.h"
 #include "ble_nus.h"
 
+#include "nrf_power.h"
+#include "nrf_bootloader_info.h"
+#include "ble_dfu.h"
+#include "nrf_dfu_ble_svci_bond_sharing.h"
+#include "nrf_svci_async_function.h"
+#include "nrf_svci_async_handler.h"
+
+#include "nrf_pwr_mgmt.h"
+
 #include "bsp_btn_ble.h"
 #include "app_timer.h"
 
