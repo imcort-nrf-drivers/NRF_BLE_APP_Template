@@ -175,7 +175,7 @@ int main(void)
 {
     bool erase_bonds;
 		
-		APP_ERROR_CHECK(ble_dfu_buttonless_async_svci_init());  //Enable in Release
+		//APP_ERROR_CHECK(ble_dfu_buttonless_async_svci_init());  //Enable in Release
     // Initialize.
     log_init();
     timers_init();
