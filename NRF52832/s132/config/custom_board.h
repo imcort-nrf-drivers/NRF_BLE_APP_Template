@@ -56,21 +56,20 @@
 //Sensor Pin Contact
 #define USE_IIC
 
-#define IIC_SDA   30
-#define IIC_SCL   8
-
-#define AFE4404_CS 6
+//#define IIC_SDA   30
+//#define IIC_SCL   8
 
 #define USE_SPI
 
-#define SPI_PIN_SCK				14
-#define SPI_PIN_MOSI			12
-#define SPI_PIN_MISO			15
-
-#define SPI_NAND_FLASH_CS       16
+//#define SPI_PIN_SCK				14
+//#define SPI_PIN_MOSI			12
+//#define SPI_PIN_MISO			15
 
 #define USE_UART
-#define BMD101_TX 29
-#define BMD101_CS 28
+
+//#define UART_SENSOR_TX 29
+//#define UART_SENSOR_RX 28
+
+//#define SENSOR_NAME_CS 10
 
 #endif // PCA10040_H

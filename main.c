@@ -166,7 +166,27 @@ static void idle_state_handle(void)
     }
 }
 
+APP_TIMER_DEF(sample_timer);
 
+static void m_sample_timer_handler(void *p_context)
+{
+    NRF_LOG_INFO("Timer.");
+    //Write down your own code here.
+}
+
+static void timers_create(void)
+{
+    ret_code_t err_code;
+	err_code = app_timer_create(&sample_timer, APP_TIMER_MODE_REPEATED, m_sample_timer_handler);
+    APP_ERROR_CHECK(err_code);
+}
+
+static void timers_start(void)
+{
+    ret_code_t err_code;
+	err_code = app_timer_start(sample_timer, APP_TIMER_TICKS(2000), NULL);  //2ms
+    APP_ERROR_CHECK(err_code);
+}
 
 
 /**@brief Application main function.
@@ -175,19 +195,22 @@ int main(void)
 {
     bool erase_bonds;
 		
-		//APP_ERROR_CHECK(ble_dfu_buttonless_async_svci_init());  //Enable in Release
+	//APP_ERROR_CHECK(ble_dfu_buttonless_async_svci_init());  //Enable in Release
     // Initialize.
     log_init();
     timers_init();
     buttons_leds_init(&erase_bonds);
     power_management_init();
 	
-		sd_power_dcdc_mode_set(NRF_POWER_DCDC_ENABLE);
-		simple_ble_init();
+	sd_power_dcdc_mode_set(NRF_POWER_DCDC_ENABLE);
+	simple_ble_init();
 
     // Start execution.
     NRF_LOG_INFO("BLE Template Init.");
     advertising_start();
+    
+    timers_create();
+    timers_start();
 
     // Enter main loop.
     for (;;)
