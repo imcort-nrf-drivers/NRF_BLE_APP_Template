@@ -54,18 +54,18 @@
 #define BUTTONS_ACTIVE_STATE 0
 
 //Sensor Pin Contact
-#define USE_IIC
+//#define USE_IIC
 
 //#define IIC_SDA   30
 //#define IIC_SCL   8
 
-#define USE_SPI
+//#define USE_SPI
 
 //#define SPI_PIN_SCK				14
 //#define SPI_PIN_MOSI			12
 //#define SPI_PIN_MISO			15
 
-#define USE_UART
+//#define USE_UART
 
 //#define UART_SENSOR_TX 29
 //#define UART_SENSOR_RX 28
