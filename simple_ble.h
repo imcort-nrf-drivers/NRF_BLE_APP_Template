@@ -26,6 +26,8 @@
 #include "bsp_btn_ble.h"
 #include "app_timer.h"
 
+#define TX_POWER_SET 0
+
 void bsp_event_handler(bsp_event_t event);
 void simple_ble_init(void);
 void advertising_start(void);

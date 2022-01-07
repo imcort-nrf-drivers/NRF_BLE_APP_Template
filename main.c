@@ -66,6 +66,8 @@
 
 #include "simple_ble.h"
 
+#include "transfer_handler.h"
+
 #define DEAD_BEEF                       0xDEADBEEF                                  /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 
 /**@brief Function for assert macro callback.
@@ -172,6 +174,11 @@ static void m_sample_timer_handler(void *p_context)
 {
     NRF_LOG_INFO("Timer.");
     //Write down your own code here.
+    
+    char sendbuf[100];
+    uint16_t llength = sprintf(sendbuf, "Test data %d", 123);
+    ble_data_send((uint8_t*)sendbuf, llength);
+    
 }
 
 static void timers_create(void)
@@ -202,9 +209,9 @@ int main(void)
     buttons_leds_init(&erase_bonds);
     power_management_init();
 	
-	sd_power_dcdc_mode_set(NRF_POWER_DCDC_ENABLE);
 	simple_ble_init();
-
+    sd_power_dcdc_mode_set(NRF_POWER_DCDC_ENABLE);
+    
     // Start execution.
     NRF_LOG_INFO("BLE Template Init.");
     advertising_start();

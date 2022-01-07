@@ -551,6 +551,8 @@ void simple_ble_init(void)
     services_init();
     advertising_init();
     conn_params_init();
+    
+    APP_ERROR_CHECK(sd_ble_gap_tx_power_set(BLE_GAP_TX_POWER_ROLE_ADV, m_advertising.adv_handle, TX_POWER_SET));
 
 }
 
