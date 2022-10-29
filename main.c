@@ -59,6 +59,7 @@
 #include "app_util_platform.h"
 #include "bsp_btn_ble.h"
 #include "nrf_pwr_mgmt.h"
+#include "nrf_drv_power.h"
 
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
@@ -195,6 +196,23 @@ static void timers_start(void)
     APP_ERROR_CHECK(err_code);
 }
 
+static void power_init(void)
+{
+
+    if (NRF_UICR->REGOUT0 != UICR_REGOUT0_VOUT_3V3) 
+    {
+        NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen << NVMC_CONFIG_WEN_Pos;
+        while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+        NRF_UICR->REGOUT0 = UICR_REGOUT0_VOUT_3V3;
+
+        NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren << NVMC_CONFIG_WEN_Pos;
+        while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+    }
+    
+    nrf_drv_power_init(NULL);
+    
+}
+
 
 /**@brief Application main function.
  */
@@ -204,6 +222,7 @@ int main(void)
 		
 	//APP_ERROR_CHECK(ble_dfu_buttonless_async_svci_init());  //Enable in Release
     // Initialize.
+    power_init();
     log_init();
     timers_init();
     buttons_leds_init(&erase_bonds);
