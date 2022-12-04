@@ -67,8 +67,6 @@
 
 #include "simple_ble.h"
 
-#include "transfer_handler.h"
-
 #define DEAD_BEEF                       0xDEADBEEF                                  /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 
 /**@brief Function for assert macro callback.
@@ -196,22 +194,22 @@ static void timers_start(void)
     APP_ERROR_CHECK(err_code);
 }
 
-static void power_init(void)
-{
+//static void power_init(void)
+//{
 
-    if (NRF_UICR->REGOUT0 != UICR_REGOUT0_VOUT_3V3) 
-    {
-        NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen << NVMC_CONFIG_WEN_Pos;
-        while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
-        NRF_UICR->REGOUT0 = UICR_REGOUT0_VOUT_3V3;
+//    if (NRF_UICR->REGOUT0 != UICR_REGOUT0_VOUT_3V3) 
+//    {
+//        NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen << NVMC_CONFIG_WEN_Pos;
+//        while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+//        NRF_UICR->REGOUT0 = UICR_REGOUT0_VOUT_3V3;
 
-        NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren << NVMC_CONFIG_WEN_Pos;
-        while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
-    }
-    
-    nrf_drv_power_init(NULL);
-    
-}
+//        NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren << NVMC_CONFIG_WEN_Pos;
+//        while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+//    }
+//    
+//    nrf_drv_power_init(NULL);
+//    
+//}
 
 
 /**@brief Application main function.
@@ -222,7 +220,7 @@ int main(void)
 		
 	//APP_ERROR_CHECK(ble_dfu_buttonless_async_svci_init());  //Enable in Release
     // Initialize.
-    power_init();
+    //power_init();
     log_init();
     timers_init();
     buttons_leds_init(&erase_bonds);
